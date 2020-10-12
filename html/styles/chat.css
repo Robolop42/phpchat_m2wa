@@ -1,0 +1,15 @@
+#chat_container {
+    background-color: #ddd;
+    width: 80%;
+}
+
+.send_msg form {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: blue;
+}
+
+.send_msg * {
+    flex-grow: 1;
+}
