@@ -1,6 +1,41 @@
 #chat_container {
     background-color: #ddd;
+
     width: 80%;
+}
+
+#chat_container #chats {
+    height:500px;
+    overflow-y: scroll;
+}
+
+.chatInfo {
+    padding: 0 10px;
+    display: flex;
+    /* justify-content: left; */
+}
+
+.chatInfo .msgdate {
+    margin-right: 10px;
+}
+
+.myinfo {
+    justify-content: flex-end;
+}
+
+.message {
+    background-color: aquamarine;
+    width: max-content;
+    max-width: calc(100% - 30px);
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.mymessages {
+    background-color: plum;
+    margin-right: 5px;
+    margin-left:auto;
 }
 
 .send_msg form {
@@ -13,3 +48,27 @@
 .send_msg * {
     flex-grow: 1;
 }
+
+#loadmore {
+    text-align: center;
+}
+
+/* custom scrollbar from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
