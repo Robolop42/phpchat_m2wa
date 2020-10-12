@@ -14,6 +14,8 @@
 <?php
 session_start();
 
+
+
 try{
     $base = new PDO('mysql:host=localhost;dbname=users','admin',']weCRJnL84');
 } catch (Exception $e){
@@ -34,6 +36,11 @@ $pass = isset($_POST['password']) ? $_POST['password'] : NULL;
 //     $status = "unset";
 // }
 
+if (isset($_POST['logout'])) {
+    session_destroy();
+    header("Location: /index.php");
+  }
+
 if (isset($_POST['message'])) {
     #Gestion des apostrophes
     $message = str_replace("'","''",$_POST['message']);
@@ -51,7 +58,6 @@ $reponse = $base->query($sql);
 $donnees = $reponse->fetch();
 if (is_array($donnees)) #Si la réponse est parvenue 
 {
-    echo("password verify : " . password_verify($pass,$donnees['password']));
     if (password_verify($pass,$donnees['password'])) #et si le mot de passe est vérifié
     {
         // $status == "valid"; #Action
@@ -67,17 +73,16 @@ $reponse->closeCursor();
 
 <!-- Si le statut est valide alors on charge le chat -->
     <?php 
+    include("header.php");
     if (isset($_SESSION['name'])) {
         include("chat.php");
         // include("logout.php");
     } else {
-        include("header.php");
+        
     }   
 
     
-    if (isset($_POST['logout'])) {
-        echo('logout set');
-      }
+
     ?>
 
 </body>

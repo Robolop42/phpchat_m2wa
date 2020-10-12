@@ -1,4 +1,12 @@
 <?php 
+    if(isset($_SESSION['name']))
+    {
+        echo("
+        <form action='' method='post'>
+            <input type='submit' value='logout' name='logout'>
+        </form>");
+    }
+    else {
     echo("<div id='form' class=''>
         <form action='' method='post'>
             <label>Connection</label>
@@ -8,4 +16,5 @@
         </form>
         <div><a href='signup.php'>S'inscrire</a></div>
         </div>"); 
+    }
     ?>
