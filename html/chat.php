@@ -11,7 +11,7 @@
                 <td>" . date("H:i", strtotime($donnees['date'])) . "</td>
             </tr>
             <tr>
-                <td>" . $donnees['message'] . "</td>
+                <td>" . htmlspecialchars($donnees['message'], ENT_QUOTES, 'UTF-8') . "</td>
             </tr>
         </table>
         <hr/>
