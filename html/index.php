@@ -63,6 +63,12 @@ if (is_array($donnees)) #Si la réponse est parvenue
         // $status == "valid"; #Action
         $_SESSION['name'] = $log;
     }
+    else {
+        $password_incorrect = True;
+    }
+}
+elseif (isset($_POST['connect'])) {
+    $username_incorrect = True;
 }
 
 
