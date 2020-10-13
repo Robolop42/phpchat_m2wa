@@ -40,13 +40,14 @@
     if (isset($_POST['message'])) {
         #Gestion des apostrophes
         $message = str_replace("'", "''", $_POST['message']);
+        unset($_POST['message']);
         #Le nom de l'auteur est disponible dans les informations de sessions
         $author = $_SESSION['name'];
         #Génération et execution de la query SQL
         $sql1 = "INSERT INTO messages(author, message)
             VALUES ('$author','$message');";
         $base->exec($sql1);
-        unset($_POST['message']);
+        
     };
 
     $sql = "SELECT * FROM `usertable` WHERE (login='$log');";

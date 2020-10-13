@@ -11,6 +11,7 @@ $donnees = $reponse->fetch();
 
 $last = print("<script>$('.message:last').attr('id');</script>");
 
+
 if ($donnees['messageid'] > $last)
     {  
         include('display_chats.php');
