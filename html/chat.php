@@ -58,50 +58,59 @@
 </style>
 
 <script type="text/javascript">
-    // Scrolling to bottom chats (most recents)
+    // // Scrolling to bottom chats (most recents)
     window.onload = function() {
 
 
         // objDiv.scrollTop = objDiv.scrollHeight;
-        fetchdata(true)
+        fetch_chats(true)
     }
 
 
-    function fetchdata(scroll) {
-        $.ajax({
-            url: 'fetch_chats.php',
-            type: 'post',
-            success: function(data) {
-                var objDiv = document.getElementById("chats");
-                $('#chats').html(data);
-                if (scroll === true) {
-                    objDiv.scrollTop = objDiv.scrollHeight;
-                }
-                //  objDiv.scrollTop = objDiv.scrollHeight;
-                // location.reload();
-
-            },
-            complete: function(data) {
-                setTimeout(function() {fetchdata(false)}, 5000);
-            }
-        });
-    }
-
-    // function loadXMLDoc() {
-    //     var xmlhttp = new XMLHttpRequest();
-
-    //     xmlhttp.onreadystatechange = function() {
-    //         console.log('ready');
-    //         if (xmlhttp.readyState == XMLHttpRequest.DONE) {
-    //             if (xmlhttp.status == 200) {
-    //                 console.log(xmlhttp.responseText);
-    //             } else {
-    //                 alert('something else other than 200 was returned');
+    // function fetchdata(scroll) {
+    //     $.ajax({
+    //         url: 'fetch_chats.php',
+    //         type: 'post',
+    //         success: function(data) {
+    //             var objDiv = document.getElementById("chats");
+    //             $('#chats').html(data);
+    //             if (scroll === true) {
+    //                 objDiv.scrollTop = objDiv.scrollHeight;
     //             }
-    //         }
-    //     };
+    //             //  objDiv.scrollTop = objDiv.scrollHeight;
+    //             // location.reload();
 
-    //     xmlhttp.open("GET", "fetch_chats.php", true);
-    //     xmlhttp.send();
+    //         },
+    //         complete: function(data) {
+    //             setTimeout(function() {
+    //                 fetchdata(false)
+    //             }, 5000);
+    //         }
+    //     });
     // }
+
+    let lastid = 0;
+    setInterval(fetch_chats, 2000);
+
+    function fetch_chats(scroll) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) { // Si le document est reçu et prêt
+                var chats = document.getElementById("chats"); 
+                chats.innerHTML = this.responseText; //Insérer le contenu du document pour 
+                // var lastmsg  = ;
+                // 
+                if (chats.lastChild) {
+                    lastid = chats.lastChild.getAttribute('id')
+                }
+                console.log(lastid);
+                if (scroll === true) {
+                    chats.scrollTop = chats.scrollHeight;
+                }
+            }
+        };
+        xhttp.open("GET", "fetch_chats.php?lastId=" + lastid, true);
+        xhttp.send();
+    }
+    
 </script>
