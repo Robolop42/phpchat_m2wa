@@ -30,3 +30,4 @@
         }
 
         $reponse->closeCursor();
+?>

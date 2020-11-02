@@ -105,11 +105,3 @@
     //     xmlhttp.send();
     // }
 </script>
-
-<!-- <div id='form' class=''>
-        <form action='' method='post'>
-            <label>Message</label>
-            <input type='text' name='message'><br>
-            <input type='submit' value='Envoyer'>
-        </form>
-        </div> -->
