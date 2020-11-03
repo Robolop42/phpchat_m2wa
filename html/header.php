@@ -4,7 +4,8 @@
         echo("
         <form action='' method='post'>
             <input type='submit' value='logout' name='logout'>
-        </form>");
+        </form>
+        <div>Bonjour ". $_SESSION['name'] ."</div>");
     }
     else {
     echo("<div id='form' class=''>

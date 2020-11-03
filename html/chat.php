@@ -1,3 +1,14 @@
+<?php 
+if (isset($_SESSION['channel'])) {
+    if (isset($_GET['channel'])) {
+        $_SESSION['channel'] = isset($_GET['channel']) ? $_GET['channel'] : '1';
+    }
+}
+else {
+$_SESSION['channel'] = '1';
+};
+$channel = $_SESSION['channel'];
+?>
 <div id="chat_container">
     <div id="chats">
         <div class="message" id="0"></div>
@@ -33,12 +44,22 @@
 
     </div>
     <div id='form' class='send_msg'>
-        <form action='' method='post'>
-            <input type='text' autocomplete='off' name='message'><br>
-            <input type='submit' value='Envoyer'>
+        <form>
+            <input type='text' autocomplete='off' id='message' autofocus/><br>
+            <input type='submit' value='Envoyer' onclick='postChat()'>
         </form>
     </div>
 
+    
+
+    <form method='get' action=''>
+            <!-- <input type='text' autocomplete='off' id='channel' name='channel' autofocus/><br> -->
+            <label>Choose channel</label>
+            <input type='submit' value='1' name='channel'>
+            <input type='submit' value='2' name='channel'>
+            <input type='submit' value='3' name='channel'>
+            <input type='submit' value='4' name='channel'>
+        </form>
 </div>
 
 
@@ -66,7 +87,7 @@
         fetch_chats(true)
     }
 
-
+    // FETCHING WITH AJAX & JQUERY
     // function fetchdata(scroll) {
     //     $.ajax({
     //         url: 'fetch_chats.php',
@@ -89,14 +110,16 @@
     //     });
     // }
 
+    // Initiating lastid with 0
     let lastid = 0;
-    setInterval(fetch_chats, 2000);
+    // Setting interval to fetch chats if there are new ones
+    setInterval(fetch_chats, 1000);
 
     function fetch_chats(scroll) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) { // Si le document est reçu et prêt
-                var chats = document.getElementById("chats"); 
+                var chats = document.getElementById("chats");
                 chats.innerHTML = this.responseText; //Insérer le contenu du document pour 
                 // var lastmsg  = ;
                 // 
@@ -109,8 +132,24 @@
                 }
             }
         };
-        xhttp.open("GET", "fetch_chats.php?lastId=" + lastid, true);
+        xhttp.open("GET", "fetch_chats.php?lastId=" + lastid + "&channel=<?php echo("$channel")?>", true);
         xhttp.send();
     }
-    
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.addEventListener('readystatechange', function() {
+        if (xhttp.readyState === XMLHttpRequest.DONE) {
+            console.log('message sent')
+        }
+    });
+
+    function postChat() {
+        xhttp.open("POST", "post_chat.php", true);
+        xhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        req = document.getElementById('message').value
+        xhttp.send("message=" + req);
+        document.getElementById('message').value = '';
+        document.getElementById("message").focus();
+        
+    }
 </script>

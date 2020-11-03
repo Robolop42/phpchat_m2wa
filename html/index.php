@@ -13,7 +13,7 @@
     session_start();
 
     try {
-        $base = new PDO('mysql:host=localhost;dbname=users', 'admin', ']weCRJnL84');
+        $base = new PDO('mysql:host=172.28.100.14;port=3306;dbname=users', 'chat', ']weCRJnL84');
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
     }
