@@ -3,9 +3,10 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/style.css">
     <title>Best PHP chat ever</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" async></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
@@ -72,7 +73,7 @@
     $reponse->closeCursor();
     ?>
 
-
+    <div class="site-content">
     <!-- Si le statut est valide alors on charge le chat -->
     <?php
     include("header.php");
@@ -80,7 +81,13 @@
         include("chat.php");
     }
     ?>
-
+    </div>
+<?php
+require_once('pdo.class.php');
+$pdo = new PDOC('users');
+$q =  "SELECT login FROM `usertable`  WHERE login LIKE 'a%'";
+print_r($pdo->q($q));
+?>
 </body>
 
 
